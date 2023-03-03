@@ -1,0 +1,44 @@
+{
+  "name": "mantine-datagrid",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "license": "UNLICENSED",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@mantine/utils": "^5.10.5",
+    "tabler-icons-react": "^1.56.0"
+  },
+  "peerDependencies": {
+    "@emotion/react": "^11.10.6",
+    "@mantine/core": "^5.10.5",
+    "@mantine/hooks": "^5.10.5",
+    "react": ">=16.x",
+    "react-dom": ">=16.x"
+  },
+  "devDependencies": {
+    "@types/node": "^18.14.2",
+    "@types/react": "^18.0.27",
+    "@types/react-dom": "^18.0.10",
+    "@vitejs/plugin-react-swc": "^3.0.0",
+    "typescript": "^4.9.3",
+    "vite": "^4.1.0",
+    "vite-plugin-dts": "^2.0.2"
+  },
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/mantine-datagrid.umd.js",
+  "module": "./dist/mantine-datagrid.es.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/mantine-datagrid.es.js",
+      "require": "./dist/mantine-datagrid.umd.js"
+    }
+  }
+}
