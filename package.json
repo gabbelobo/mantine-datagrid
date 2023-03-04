@@ -32,13 +32,10 @@
   "files": [
     "dist"
   ],
-  "main": "./dist/mantine-datagrid.umd.js",
   "module": "./dist/mantine-datagrid.es.js",
   "types": "./dist/index.d.ts",
   "exports": {
-    ".": {
-      "import": "./dist/mantine-datagrid.es.js",
-      "require": "./dist/mantine-datagrid.umd.js"
-    }
+    ".": "./dist/mantine-datagrid.es.js",
+    "./localization": "./dist/localization.es.js"
   }
 }

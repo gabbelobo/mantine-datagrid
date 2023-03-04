@@ -1,0 +1,18 @@
+{
+    "emptyTable": "No matching records found",
+    "info": "Showing _START_ to _END_ of _TOTAL_ entries",
+    "infoSelected": "Selected _SELECTED_ entries",
+    "itemsPerPage": "Items per page",
+    "loading": "Loading...",
+    "search": "Search",
+    "paginate": {
+        "next": "Next",
+        "previous": "Previous",
+        "first": "First",
+        "last": "Last"
+    },
+    "aria": {
+        "sortAscending": ": activate to sort column ascending",
+        "sortDescending": ": activate to sort column descending"
+    }
+}

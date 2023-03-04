@@ -4,7 +4,7 @@ import { IRowData, IFilter } from './types/data';
 import { IDataGridProps } from './types/dataGrid';
 import sortData from './utils/sort';
 
-const DataGrid = <T extends IRowData>({ columns, rows, height, striped, rowSelection, groupBy, pagination }: IDataGridProps<T>) => {
+const DataGrid = <T extends IRowData>({ columns, rows, height, striped, rowSelection, groupBy, pagination, localization }: IDataGridProps<T>) => {
     const [totalPages, setTotalPages] = useState(0)
     const [sortedData, setSortedData] = useState<T[]>(rows);
 
@@ -31,7 +31,8 @@ const DataGrid = <T extends IRowData>({ columns, rows, height, striped, rowSelec
 
     const customizationProps = {
         height,
-        striped
+        striped,
+        localization
     }
     const optionsProps = {
         rowSelection,
@@ -41,9 +42,10 @@ const DataGrid = <T extends IRowData>({ columns, rows, height, striped, rowSelec
 
     return (
         <BaseGrid
+            //@ts-ignore
             columns={columns}
             pageRows={sortedData}
-            totalPages={totalPages}
+            totalRows={rows.length}
             onFilterChange={onFilterChange}
             {...optionsProps}
             {...customizationProps}

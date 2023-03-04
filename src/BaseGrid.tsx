@@ -1,17 +1,5 @@
 import { useState, useEffect } from 'react';
-import {
-    Table,
-    ScrollArea,
-    Text,
-    TextInput,
-    Pagination,
-    Select,
-    Flex,
-    Group,
-    Box,
-} from '@mantine/core';
-
-import { Search } from 'tabler-icons-react';
+import { Table, ScrollArea, Box } from '@mantine/core';
 import useStyles from './Styles';
 import { IRowData, IFilter, RowId } from './types/data';
 import { IBaseGridProps } from './types/baseGrid';
@@ -19,10 +7,11 @@ import Body from './components/Body';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Actions from './components/Actions';
+import english from './localization/en.json'
 
 const BaseGrid = <T extends IRowData>(props: IBaseGridProps<T>) => {
     // Props
-    const { columns, pageRows, totalPages } = props
+    const { columns, pageRows, totalRows } = props
 
     // Options props
     const { rowSelection, groupBy, pagination } = props
@@ -31,7 +20,7 @@ const BaseGrid = <T extends IRowData>(props: IBaseGridProps<T>) => {
     const { onFilterChange } = props
 
     // Customization props
-    const { height, striped = false } = props
+    const { height, striped = false, localization = english } = props
 
     // Hooks
     const { classes, cx } = useStyles();
@@ -75,6 +64,7 @@ const BaseGrid = <T extends IRowData>(props: IBaseGridProps<T>) => {
     const handleChangeItemsPerPage = (value: string | null) => {
         if (value == null) return;
         setItemsPerPage(value)
+        setActivePage(1)
         let filter = getFilter()
         filter.page = 1
         filter.itemsPerPage = parseInt(value)
@@ -109,7 +99,7 @@ const BaseGrid = <T extends IRowData>(props: IBaseGridProps<T>) => {
     const displayedCols = columns.filter(column => !column.hidden && column.key != groupBy)
 
     const firstRegister = (activePage - 1) * itemsPerPage + 1
-    const lastRegister = (activePage === totalPages
+    const lastRegister = (activePage === Math.ceil(totalRows / itemsPerPage) 
         ? firstRegister + pageRows.length
         : firstRegister + itemsPerPage) - 1
 
@@ -129,6 +119,8 @@ const BaseGrid = <T extends IRowData>(props: IBaseGridProps<T>) => {
                 handleSearchChange={handleSearchChange}
                 itemsPerPageString={itemsPerPageString}
                 handleChangeItemsPerPage={handleChangeItemsPerPage}
+                pagination={pagination}
+                localization={localization}
             />
             <ScrollArea
                 styles={{ thumb: { zIndex: 3 } }}
@@ -150,6 +142,7 @@ const BaseGrid = <T extends IRowData>(props: IBaseGridProps<T>) => {
                             handleChangeSorting={handleChangeSorting}
                             sortBy={sortBy}
                             rowSelection={rowSelection}
+                            localization={localization}
                         />
                     </thead>
                     <tbody>
@@ -158,6 +151,7 @@ const BaseGrid = <T extends IRowData>(props: IBaseGridProps<T>) => {
                             displayedCols={displayedCols}
                             rowSelection={rowSelection}
                             toggleRow={toggleRow}
+                            localization={localization}
                         />
                     </tbody>
                 </Table>
@@ -168,8 +162,10 @@ const BaseGrid = <T extends IRowData>(props: IBaseGridProps<T>) => {
                 lastRegister={lastRegister}
                 rowSelection={rowSelection}
                 handleChangePage={handleChangePage}
-                totalPages={totalPages}
+                totalRows={totalRows}
                 activePage={activePage}
+                localization={localization}
+                itemsPerPage={itemsPerPage}
             />
         </Box>
     );

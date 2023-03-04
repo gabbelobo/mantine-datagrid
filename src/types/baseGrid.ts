@@ -1,4 +1,5 @@
 import { IRowData, IColumn, IFilter, RowId } from "./data"
+import { ILocalization } from "./localization"
 
 interface ISelection {
     selection: RowId[],
@@ -7,7 +8,8 @@ interface ISelection {
 
 interface IBaseCustomizationProps {
     height?: string | number,
-    striped?: boolean
+    striped?: boolean,
+    localization?: ILocalization
 }
 
 interface IOptionsProps {
@@ -23,7 +25,7 @@ interface ICallbackProps<T> {
 interface IBaseGridProps<T extends IRowData> extends IBaseCustomizationProps, ICallbackProps<T>, IOptionsProps {
     columns: IColumn<T>[],
     pageRows: T[],
-    totalPages: number,
+    totalRows: number,
 }
 
 export type { IBaseGridProps, IBaseCustomizationProps, ICallbackProps, ISelection, IOptionsProps }

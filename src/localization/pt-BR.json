@@ -1,0 +1,18 @@
+{
+    "emptyTable": "Nenhum registro encontrado",
+    "info": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+    "infoSelected": "Selecionados _SELECTED_ registros",
+    "itemsPerPage": "Registros por página",
+    "loading": "Carregando...",
+    "search": "Pesquisar",
+    "paginate": {
+        "next": "Próximo",
+        "previous": "Anterior",
+        "first": "Primeiro",
+        "last": "Último"
+    },
+    "aria": {
+        "sortAscending": ": Ordenar colunas de forma ascendente",
+        "sortDescending": ": Ordenar colunas de forma descendente"
+    }
+}

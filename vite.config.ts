@@ -8,10 +8,12 @@ export default defineConfig({
 	plugins: [react(), dts({ insertTypesEntry: true })],
 	build: {
 		lib: {
-			entry: path.resolve(__dirname, './src/index.ts'),
-			name: 'mantine-datagrid',
-			formats: ['es', 'umd'],
-			fileName: (format) => `mantine-datagrid.${format}.js`
+			entry: {
+				'mantine-datagrid': path.resolve(__dirname, './src/index.ts'),
+				'localization': path.resolve(__dirname, './src/localization/index.ts')
+			},
+			formats: ['es'],
+			fileName: (format, entry) => `${entry}.${format}.js`
 		},
 		rollupOptions: {
 			external: ['react', 'react-dom', 'react/jsx-runtime', '@emotion/react', '@mantine/core', '@mantine/hooks'],

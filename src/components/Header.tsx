@@ -3,6 +3,7 @@ import { Checkbox } from '@mantine/core'
 import Th from './Th'
 import { ISelection } from '../types/baseGrid'
 import { IColumn, IRowData } from '../types/data'
+import { ILocalization } from '../types/localization'
 interface IHeaderProps<T extends IRowData> {
     displayedCols: IColumn<T>[],
     reverseSortDirection: boolean,
@@ -11,6 +12,7 @@ interface IHeaderProps<T extends IRowData> {
     handleChangeSorting: (field: keyof T) => void,
     sortBy: keyof T | null,
     rowSelection?: ISelection,
+    localization: ILocalization
 }
 
 const Header = <T extends IRowData>(props: IHeaderProps<T>) => {

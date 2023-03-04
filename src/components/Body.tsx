@@ -1,6 +1,7 @@
 import React from 'react'
 import { ISelection } from '../types/baseGrid'
 import { IColumn, IRowData, RowId } from '../types/data'
+import { ILocalization } from '../types/localization'
 import groupByFn from '../utils/groupBy'
 import NotFound from './NotFound'
 import Rows from './Rows'
@@ -10,7 +11,8 @@ interface IBodyProps<T extends IRowData> {
     displayedCols: IColumn<T>[],
     rowSelection?: ISelection,
     toggleRow?: (id: RowId) => void,
-    groupBy?: string
+    groupBy?: string,
+    localization: ILocalization
 }
 
 const Body = <T extends IRowData>(props: IBodyProps<T>) => {
