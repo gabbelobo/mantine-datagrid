@@ -19,7 +19,7 @@ export default defineConfig({
 			external: ['react', 'react-dom', 'react/jsx-runtime', '@emotion/react', '@mantine/core', '@mantine/hooks'],
 			output: {
 				globals: {
-					react: 'React',
+					'react': 'React',
 					'react/jsx-runtime': 'jsxRuntime',
 					'react-dom': 'ReactDOM'
 				}

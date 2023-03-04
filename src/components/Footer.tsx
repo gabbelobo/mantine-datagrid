@@ -19,7 +19,7 @@ const Footer = (props: IFooterProps) => {
     const infoString = localization.info
         .replace('_START_', firstRegister.toString())
         .replace('_END_', lastRegister.toString())
-        .replace('_TOTAL_', lastRegister.toString())
+        .replace('_TOTAL_', totalRows.toString())
     return (
         <Flex justify={'space-between'} wrap='wrap-reverse'>
             {pagination && <Text>{infoString}</Text>}

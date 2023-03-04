@@ -15,7 +15,8 @@ interface IBaseCustomizationProps {
 interface IOptionsProps {
     rowSelection?: ISelection,
     groupBy?: string,
-    pagination?: boolean
+    pagination?: boolean,
+    debounceTime?: number
 }
 
 interface ICallbackProps<T> {

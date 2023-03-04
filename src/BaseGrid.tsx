@@ -8,13 +8,14 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Actions from './components/Actions';
 import english from './localization/en.json'
+import useDebouncedValue from './hooks/useDebounceValue';
 
 const BaseGrid = <T extends IRowData>(props: IBaseGridProps<T>) => {
     // Props
     const { columns, pageRows, totalRows } = props
 
     // Options props
-    const { rowSelection, groupBy, pagination } = props
+    const { rowSelection, groupBy, pagination, debounceTime = 200 } = props
 
     // Callback props
     const { onFilterChange } = props
@@ -28,6 +29,7 @@ const BaseGrid = <T extends IRowData>(props: IBaseGridProps<T>) => {
     // State
     const [sortBy, setSortBy] = useState<keyof T | null>(null);
     const [search, setSearch] = useState('');
+    const [debouncedSearch] = useDebouncedValue(search, debounceTime)
     const [itemsPerPageString, setItemsPerPage] = useState<string | null>('10')
     const [reverseSortDirection, setReverseSortDirection] = useState(false);
     const [activePage, setActivePage] = useState(1)
@@ -46,10 +48,10 @@ const BaseGrid = <T extends IRowData>(props: IBaseGridProps<T>) => {
         rowSelection.setSelection((current) => (current.length === pageRows.length ? [] : pageRows.map((item) => item.id)));
     }
 
-    const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const { value } = event.currentTarget;
-        setSearch(value)
+    const handleSearchChange = (value: string) => {
+        setActivePage(1)
         let filter = getFilter()
+        filter.page = 1
         filter.search = value
         handleFilterChange(filter)
     }
@@ -108,6 +110,10 @@ const BaseGrid = <T extends IRowData>(props: IBaseGridProps<T>) => {
     }, [])
 
     useEffect(() => {
+        handleSearchChange(debouncedSearch)
+    }, [debouncedSearch])
+
+    useEffect(() => {
         if (!rowSelection || rowSelection.selection.length == 0) return
         rowSelection.setSelection(current => current.filter(item => pageRows.find(row => row.id == item)))
     }, [activePage, sortBy, search, itemsPerPage])
@@ -116,7 +122,7 @@ const BaseGrid = <T extends IRowData>(props: IBaseGridProps<T>) => {
         <Box>
             <Actions 
                 search={search}
-                handleSearchChange={handleSearchChange}
+                setSearch={setSearch}
                 itemsPerPageString={itemsPerPageString}
                 handleChangeItemsPerPage={handleChangeItemsPerPage}
                 pagination={pagination}
