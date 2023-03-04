@@ -4,7 +4,7 @@ import { IRowData, IFilter } from './types/data';
 import { IDataGridProps } from './types/dataGrid';
 import sortData from './utils/sort';
 
-const DataGrid = <T extends IRowData>(props: IDataGridProps<T>) => {
+const LocalDataGrid = <T extends IRowData>(props: IDataGridProps<T>) => {
     const { columns, rows, height, striped, rowSelection, groupBy, pagination, localization, debounceTime } = props
     const [sortedData, setSortedData] = useState<T[]>(rows);
     const [totalRows, setTotalRows] = useState(rows.length)
@@ -52,4 +52,4 @@ const DataGrid = <T extends IRowData>(props: IDataGridProps<T>) => {
     )
 }
 
-export default DataGrid
+export default LocalDataGrid

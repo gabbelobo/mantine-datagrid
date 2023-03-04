@@ -64,7 +64,7 @@ const BaseGrid = <T extends IRowData>(props: IBaseGridProps<T>) => {
     }
 
     const handleChangeItemsPerPage = (value: string | null) => {
-        if (value == null) return;
+        if (value == null) return
         setItemsPerPage(value)
         setActivePage(1)
         let filter = getFilter()
